@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-in-special-node
+  labels:
+    app: app-in-special-node
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app-in-special-node
+  template:
+    metadata:
+      labels:
+        app: app-in-special-node
+    spec:
+      containers:
+      - name: api
+        image: bitnami/nginx
+        ports:
+        - containerPort: 8080
+      nodeSelector:
+        big-worker-node: "true"
